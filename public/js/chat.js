@@ -29,7 +29,7 @@ Swal.fire({
                 })
                 const getMessages = await fetch('/api/chat/');
                 const result =await getMessages.json();
-                socket.emit('message', result.message);
+                socket.emit('messages', result);
                 chat.value = ''
             }
         }
