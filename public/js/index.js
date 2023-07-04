@@ -11,8 +11,15 @@ const deleteButton = async (data) => {
             method: "DELETE"
         })
         const result = await response.json();
-        if(result.status === "error") return alert('Something happens');
-        else socket.emit('productList', result.products);
+          if(result.status === "error"){
+            alert('Ocurrio un error');
+        }
+        else{
+
+            const getProducts = await fetch('/api/products');
+            const resultProducts = await getProducts.json();
+        socket.emit('productList', resultProducts.products);
+        }
     } catch (error) {
         console.log(error)
     }
