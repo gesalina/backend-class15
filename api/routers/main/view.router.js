@@ -4,7 +4,9 @@ import ProductManager from '../../controllers/dao/ProductManager.js'
 const router = Router();
 const product = new ProductManager();
 
-// ENDPOINT - Get all products
+/*
+* This router allows to show the products in the main view
+*/
 
 router.get("/", async (request, response) => {
   const getProducts = await product.getProducts();
@@ -19,7 +21,7 @@ router.get("/", async (request, response) => {
 });
 
 /**
-*  This endpoint allows show the products | EXPERIMENTAL
+*  This router allows show the products | EXPERIMENTAL
 *
 router.get('/products', async(request, response) => {
   const getProducts = await product.getProducts();
@@ -31,6 +33,10 @@ router.get('/products', async(request, response) => {
 })
 */
 
+/**
+* This router allows to render the products on realtime
+* have a form and a delete button working with websocket
+*/
 router.get('/realtimeproducts', async(request, response) => {
   const products = await product.getProducts();
   response.render('realTimeProducts', {
@@ -38,7 +44,9 @@ router.get('/realtimeproducts', async(request, response) => {
     products: products
   })
 })
-
+/**
+*  This router render the chat, that work with websocket
+*/
 router.get('/chat', async(request, response) => {
   response.render('chat');
 })
