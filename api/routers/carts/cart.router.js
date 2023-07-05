@@ -54,4 +54,29 @@ router.post("/:cid/product/:pid", async (request, response) => {
     }
     response.json({status:'Success'});
   })
+/**
+*  This endpoint delete a products | EXPERIMENTAL
+*
+*--------------------------------------------------------------------
+router.delete('/:cid/product/:pid', async(request, response) => {
+  const cartId = request.param.cid;
+  const productId = request.param.pid;
+  try {
+    const deleteCartProduct = await cart.deleteProduct(cartId, productId);
+    if(deleteCartProduct.error){
+      return response.status(404).json({status: 'error', error: deleteCartProduct.error});
+    }
+    response.json({status: 'success', payload: deleteCartProduct});
+  } catch (err){
+    response.status(404).json({status: 'error', error: err.message})
+  }
+  
+})
+*---------------------------------------------------------------------
+*  This endpoint update a product from a specific cart
+*
+router.put('/:cid/product/:pid', async(request, response) => {
+
+})
+*/
 export default router
