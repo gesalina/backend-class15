@@ -5,14 +5,14 @@ class chatManager {
       this.error = "";
     }
     /**
-     * Get the products
+     * This function get the user and messages from our collection
      */
     getMessages = async () => {
         const messages = await chatModel.find().lean();
         return messages;
     };
     /**
-     * Create a new product
+     * This function insert into our collection the user and message
      */
     insertMessage = async (data) => {
       const result = await chatModel.create(data);
