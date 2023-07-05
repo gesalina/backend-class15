@@ -1,13 +1,21 @@
 import { productModel } from "./models/product.model.js";
-
+/**
+* This class handle everything about our products
+*/
 class ProductManager {
     constructor(){
         this.error = "";
     }
+    /**
+    * This function get all the product from our collection
+    */
     getProducts = async () => {
         const products = await productModel.find().lean();
         return products;
     };
+    /**
+    * This function find a product by ID
+    */
     findProductById = async (productId) => {
         const product = await productModel.find({id: productId});
         if(!product || product <= 0){
@@ -15,6 +23,9 @@ class ProductManager {
         }
         return product
     }
+    /**
+    * This function generate new id in each new product inserted
+    */
     generateId = async() => {
         const getProductsId = await this.getProducts();
         return getProductsId.length === 0 ? 1 : getProductsId.at(-1).id + 1;
