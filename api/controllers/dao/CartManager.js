@@ -39,6 +39,34 @@ class cartManager {
       return products
     };
     /**
+    *--------------------------------------------------------------
+    * Delete a product from a specific cart | EXPERIMENTAL
+    *
+    deleteProduct = async(cartId, productId) => {
+        const deleteProduct = await cartModel.update({id: cartId},{$pull: {products: {product: productId}});
+        if(!deleteProduct) return this.error = {error: 'Cant delete that product'};
+        return deleteProduct;
+    }
+    * -------------------------------------------------------------
+    */
+
+    /**
+    *--------------------------------------------------------------
+    * Update the product of a cart | EXPERIMENTAL
+    *
+    updateCartProduct = async(cartId, productId, quantity) => {
+      const cart = await cartModel.findOne({id: cartId});
+      const search = cart.products.find((products) => products.product === productId);
+    if(!search || !cart){
+        return this.error = {error: 'The product or the cart not exist'};
+    } else {
+        return cartModel.updateOne({id:cartId, 'products.product': productId},{$inc: {"products.$.quantity": quantity}});
+    }
+    }
+    *--------------------------------------------------------------
+    */
+    
+    /**
      * Create a UNIQUE ID for each product
      */
     createtId = async() => {
