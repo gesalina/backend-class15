@@ -18,6 +18,19 @@ router.get("/", async (request, response) => {
     );
 });
 
+/**
+*  This endpoint allows show the products | EXPERIMENTAL
+*
+router.get('/products', async(request, response) => {
+  const getProducts = await product.getProducts();
+  response.render('home', {
+    plugins = '?plugins=aspect-radio',
+    view_name: 'Tenda - Products',
+    products: getProducts
+  })
+})
+*/
+
 router.get('/realtimeproducts', async(request, response) => {
   const products = await product.getProducts();
   response.render('realTimeProducts', {
