@@ -9,7 +9,28 @@ class ProductManager {
     /**
     * This function get all the product from our collection
     */
-    getProducts = async () => {
+    getProducts = async (/**req,res*/) => {
+        /**
+        const limit = parseInt(req.query.limit) || 10;
+        const page = parseInt(req.query.page) || 1;
+        const sort = req.query.sort === 'asc' ? 1 : -1;
+        const query = req.query.query || {};
+
+        const filter = {};
+
+        if(query.category) filter.category = query.category;
+        if(query.availability) filter.availability = query.availibility;
+
+        const options = {
+            page,
+            limit,
+            sort: {price: sort},
+            lean: true
+        }
+
+        const products = await productModel.paginate(filter, options);
+        */
+        
         const products = await productModel.find().lean();
         return products;
     };
